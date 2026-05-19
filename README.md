@@ -23,16 +23,16 @@ Unity에서 대량의 탄환을 처리할 때 `Instantiate/Destroy`, `Object Poo
 | GPU | NVIDIA RTX 4080 |
 | RAM | OLOy DDR4 8GB x 4, 3200MHz CL16 |
 | Engine | Unity |
-| 테스트 조건 | 슈터 4개, 각 슈터가 `0.01초`마다 `500발` 발사 |
+| 테스트 조건 | 슈터 4개, 각 슈터가 `초당 125발` 발사 |
 
 테스트 조건을 발사량 기준으로 환산하면 다음과 같습니다.
 
 ```text
-슈터 1개 = 0.01초마다 500발 = 초당 50,000발
-슈터 4개 = 초당 200,000발 생성 요청
+슈터 1개 = 초당 125발
+슈터 4개 = 초당 500발 생성 요청
 ```
 
-따라서 이 프로젝트의 테스트는 일반적인 게임 플레이 상황보다는 **극단적인 스트레스 테스트**에 가깝습니다.
+현재 설정은 발사량을 초당 기준으로 제어하여 프레임마다 생성 요청이 한 번에 몰리지 않도록 구성했습니다.
 
 ## 최적화 단계
 
@@ -238,39 +238,21 @@ flowchart TD
 | `ECSWithJobsAndBurst` | 없음 | Burst Job | Burst Job | ECB `DestroyEntity` | Entity 생성/삭제, 렌더링 |
 | `ECSPool` | Entity Pool | Burst Job | Burst Job | 비활성화 후 재사용 | 풀 순회, SetComponentData, 렌더링 |
 
-## 테스트 결과 예시
+## 테스트 결과
 
-사용자 테스트 기준:
+현재 테스트 기준:
 
 ```text
 슈터 4개
-각 슈터: 0.01초마다 500발
-전체: 초당 200,000발 생성 요청
+각 슈터: 초당 125발
+전체: 초당 500발 생성 요청
 ```
 
-| 모드 | 관측 FPS |
-|---|---|
-| `None` | 최소 8, 최대 10, 시간이 지나며 8 근처로 하락 |
-| `ObjectPool` | 최소 8, 최대 12, 변동이 큼 |
-| `ECS` | 최소 11, 최대 12 |
-| `ECSWithJobs` | 약 12, 비교적 안정적 |
-| `ECSWithJobsAndBurst` | 약 12 |
-| `ECSPool` | 약 24 |
+초당 500발 기준의 FPS는 재측정 후 추가할 예정입니다.
 
-간단한 막대 비교:
+Unity Profiler의 CPU Timeline, GC Alloc, Rendering, Entity Structural Change, Job System 분석 자료는 아직 첨부하지 않았습니다.
 
-```text
-None                8-10 FPS  | ########
-ObjectPool          8-12 FPS  | ##########
-ECS                11-12 FPS  | ###########
-ECSWithJobs            12 FPS | ############
-ECSWithJobsAndBurst    12 FPS | ############
-ECSPool                24 FPS | ########################
-```
-
-현재 문서에 기록한 수치는 간단한 FPS 관측 결과입니다. Unity Profiler의 CPU Timeline, GC Alloc, Rendering, Entity Structural Change, Job System 분석 자료는 아직 첨부하지 않았습니다.
-
-따라서 이 결과는 최종 성능 결론이 아니라, 각 모드의 대략적인 프레임 변화만 비교한 1차 테스트 기록입니다. 상세 프로파일러 캡처는 추후 추가할 예정입니다.
+현재 README의 성능 항목은 최종 성능 결론이 아니며, 상세 프로파일러 캡처는 추후 추가할 예정입니다.
 
 ## 추후 첨부 예정
 

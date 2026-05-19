@@ -66,14 +66,14 @@
 
 | 필드 | 역할 |
 |---|---|
-| `_fireInterval` | 발사 묶음 사이의 대기 시간이다. |
-| `_bulletsPerBurst` | 한 번의 발사 주기마다 생성 요청할 탄환 수다. |
+| `_bulletsPerSecond` | 이 슈터가 1초 동안 생성 요청할 탄환 수다. |
+| `_spawnAccumulator` | 프레임별 소수점 발사량을 누적해 평균 발사량을 맞추는 값이다. |
 
 동작:
 
-- `Start()`에서 `CreateBullet()` 코루틴을 시작한다.
-- 코루틴은 무한 반복하면서 `_fireInterval`만큼 기다린다.
-- 매 주기마다 `_bulletsPerBurst` 횟수만큼 `GameManager.instance.GetBullet(transform.position)`를 호출한다.
+- `Update()`에서 `_bulletsPerSecond * Time.deltaTime`만큼 발사량을 누적한다.
+- 누적값의 정수 부분만큼 `GameManager.instance.GetBullet(transform.position)`를 호출한다.
+- 정수 발사량을 뺀 나머지는 다음 프레임으로 넘겨 평균 발사량을 유지한다.
 - GameObject 탄환이 반환되면 위치를 발사기 위치로 맞추고 활성화한다.
 - ECS 모드에서는 `GetBullet`이 `null`을 반환하므로 GameObject 활성화는 하지 않고, 내부적으로 Entity 생성 요청만 수행된다.
 

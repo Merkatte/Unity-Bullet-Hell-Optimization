@@ -181,7 +181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &226138859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d62f811d85a024941a18ae2fe2a805a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Manager
-  _optimizationType: 4
+  _optimizationType: 5
   _poolManager: {fileID: 134670065}
   _bulletSpawner: {fileID: 1248663769}
   _bulletPrefab: {fileID: 8324518290969606400, guid: 077eacf5502746a4eaf9a344d89500e1, type: 3}
@@ -295,8 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _fireInterval: 0.01
-  _bulletsPerBurst: 500
+  _bulletsPerSecond: 125
 --- !u!212 &315543394
 SpriteRenderer:
   serializedVersion: 2
@@ -421,7 +420,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -675,8 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _fireInterval: 0.01
-  _bulletsPerBurst: 500
+  _bulletsPerSecond: 125
 --- !u!212 &767586890
 SpriteRenderer:
   serializedVersion: 2
@@ -781,8 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _fireInterval: 0.01
-  _bulletsPerBurst: 500
+  _bulletsPerSecond: 125
 --- !u!212 &1239408984
 SpriteRenderer:
   serializedVersion: 2
@@ -886,6 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbc1180e4828d94eb84d4174bb3de18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
+  _ecsPoolCapacity: 100000
 --- !u!4 &1248663770
 Transform:
   m_ObjectHideFlags: 0
@@ -931,8 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _fireInterval: 0.01
-  _bulletsPerBurst: 500
+  _bulletsPerSecond: 125
 --- !u!212 &1270522169
 SpriteRenderer:
   serializedVersion: 2
