@@ -23,13 +23,13 @@ Unity에서 대량의 탄환을 처리할 때 `Instantiate/Destroy`, `Object Poo
 | GPU | NVIDIA RTX 4080 |
 | RAM | OLOy DDR4 8GB x 4, 3200MHz CL16 |
 | Engine | Unity |
-| 테스트 조건 | 슈터 4개, 각 슈터가 `초당 125발` 발사 |
+| 테스트 조건 | 슈터 4개, 각 슈터가 `초당 150발` 발사 |
 
 테스트 조건을 발사량 기준으로 환산하면 다음과 같습니다.
 
 ```text
-슈터 1개 = 초당 125발
-슈터 4개 = 초당 500발 생성 요청
+슈터 1개 = 초당 150발
+슈터 4개 = 초당 600발 생성 요청
 ```
 
 현재 설정은 발사량을 초당 기준으로 제어하여 프레임마다 생성 요청이 한 번에 몰리지 않도록 구성했습니다.
@@ -190,7 +190,7 @@ ECS Entity를 매번 생성/삭제하지 않고, 시작 시 미리 만들어 둔
 
 - 런타임 중 반복적인 `EntityManager.Instantiate` 비용을 줄입니다.
 - 수명 종료 시 `DestroyEntity`를 하지 않아 구조 변경 비용을 줄입니다.
-- 현재 테스트에서 가장 큰 FPS 개선을 보였습니다.
+- 사전 생성된 풀 크기와 현재 발사량의 균형에 따라 결과가 달라질 수 있습니다.
 
 단점:
 
@@ -244,11 +244,19 @@ flowchart TD
 
 ```text
 슈터 4개
-각 슈터: 초당 125발
-전체: 초당 500발 생성 요청
+각 슈터: 초당 150발
+전체: 초당 600발 생성 요청
 ```
 
-초당 500발 기준의 FPS는 재측정 후 추가할 예정입니다.
+초당 600발 기준의 1차 FPS 관측값입니다.
+
+| 모드 | 관측 FPS |
+|---|---|
+| `None` | 약 90-120 FPS |
+| `ObjectPool` | 약 120-148 FPS |
+| `ECSWithJobsAndBurst` | 약 148-180 FPS |
+
+`ECSPool`은 현재 풀 크기와 초기화 방식 조정이 필요하여 별도 측정 예정입니다.
 
 Unity Profiler의 CPU Timeline, GC Alloc, Rendering, Entity Structural Change, Job System 분석 자료는 아직 첨부하지 않았습니다.
 

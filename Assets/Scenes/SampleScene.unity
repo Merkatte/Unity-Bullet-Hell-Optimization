@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _bulletsPerSecond: 125
+  _bulletsPerSecond: 150
 --- !u!212 &315543394
 SpriteRenderer:
   serializedVersion: 2
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _bulletsPerSecond: 125
+  _bulletsPerSecond: 150
 --- !u!212 &767586890
 SpriteRenderer:
   serializedVersion: 2
@@ -779,7 +779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _bulletsPerSecond: 125
+  _bulletsPerSecond: 150
 --- !u!212 &1239408984
 SpriteRenderer:
   serializedVersion: 2
@@ -929,7 +929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6592734c588fa694a84e60a12db7cf00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletShooter
-  _bulletsPerSecond: 125
+  _bulletsPerSecond: 150
 --- !u!212 &1270522169
 SpriteRenderer:
   serializedVersion: 2

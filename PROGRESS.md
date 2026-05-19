@@ -41,7 +41,7 @@ Added an `ECSPool` optimization mode that prewarms ECS bullet entities and reuse
 | ECSPool-001 | `dotnet build Bullet_Hell_Optimization.sln --no-restore` | Passed | 0 warnings, 0 errors. Unity Editor play-mode behavior was not run from this shell. |
 
 ## Next Actions
-1. Test `ECSPool` in Unity Editor with four shooters at `_bulletsPerSecond = 125`, and confirm no console errors.
+1. Retest all modes in Unity Editor with four shooters at `_bulletsPerSecond = 150`.
 2. Tune `_ecsPoolCapacity` to at least `spawnRatePerSecond * bulletLifetime`.
 3. Profile `ECSPool` against `ECSWithJobsAndBurst` and inspect `EntityManager.Instantiate`, `EntityCommandBuffer.Playback`, `SetComponentData`, and rendering costs.
 
@@ -49,3 +49,4 @@ Added an `ECSPool` optimization mode that prewarms ECS bullet entities and reuse
 | Date | Summary | Evidence |
 |---|---|---|
 | 2026-05-20 | Replaced burst interval spawning with per-second accumulator spawning. Updated the scene's four shooters to 125 bullets/sec each, for 500 bullets/sec total. | `dotnet build Bullet_Hell_Optimization.sln --no-restore` succeeded with 0 warnings and 0 errors. |
+| 2026-05-20 | Updated the scene's four shooters to 150 bullets/sec each, for 600 bullets/sec total. Added first-pass FPS observations for `None`, `ObjectPool`, and `ECSWithJobsAndBurst` to README. | `dotnet build Bullet_Hell_Optimization.sln --no-restore` succeeded with 0 warnings and 0 errors. |
